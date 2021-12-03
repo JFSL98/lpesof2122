@@ -1,16 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Nota:</h1>
-    <h2>O que faz esta página (register)?</h2>
-    <p>Página com o formulário para registar.</p>
+@extends('layout.master')
 
-    @include('includes.footer');
+<body>
+    <!--<h1>Nota:</h1>
+    <h2>O que faz esta página (register)?</h2>
+    <p>Página com o formulário para registar.</p>-->
+
+    <!--register form-->
+    <div class="container-lg d-flex justify-content-center align-items-center vh-100 text-center">
+       <!--card-->
+        <div class="card card">
+            <div class="card-header">
+                <h2>Registar</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="">
+                    @csrf
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password-confirm">Confirmar Password</label>
+                        <input type="password" class="form-control" id="password-confirm" name="password_confirmation" placeholder="Confirmar Password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Registar</button>
+                    </div>
+                    </form>
+            </div>
+        </div>
+        <!--/card-->
+    </div>
+    </div>
+    <!--/register form-->
+    
+    @include('includes.footer')
 </body>
 </html>

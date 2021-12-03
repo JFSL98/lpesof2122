@@ -1,8 +1,7 @@
-<html>
-  <head>
-  <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
-  </head>
-  <body>
+
+@extends('layout.master')
+
+<body>
 <div class="container">
   <footer  class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
     <div class="col-md-4 d-flex align-items-center">
