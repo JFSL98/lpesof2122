@@ -1,0 +1,10 @@
+access them using Laravel, use:
+
+{{ HTML::script('js/scrollTo.js'); }}
+
+{{ HTML::style('css/css.css'); }}
+Or:
+
+{{ URL::asset('js/scrollTo.js'); }}
+
+{{ URL::asset('css/css.css'); }} 
