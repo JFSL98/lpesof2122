@@ -10,5 +10,7 @@
     <h1>Nota:</h1>
     <h2>O que faz esta página (register)?</h2>
     <p>Página com o formulário para registar.</p>
+
+    @include('includes.footer');
 </body>
 </html>
