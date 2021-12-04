@@ -1,9 +1,10 @@
 @extends('layout.master')
-<body>
-    <!--<h1>Nota:</h1>
-    <h2>O que faz esta página (login)?</h2>
-    <p>Página com o formulário para fazer login.</p>-->
 
+@section('title')
+Rede Alumni | Login
+@endsection
+
+@section('content')
     <!--- Login form -->
     <div class="container-lg d-flex justify-content-md-center align-items-center vh-100 text-center">
         <!--card-->
@@ -39,5 +40,4 @@
     </div><!-- /container -->
 
     @include('includes.footer')
-</body>
-</html>
+@endsection
