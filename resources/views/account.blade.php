@@ -11,6 +11,7 @@
             <h5 class="card-title">Bem-vindo!</h5>
             <a class="btn" href="/login" role="button">Login</a>
             <a class="btn" href="/register" role="button">Registar</a>
+            <a class="btn" href="/index" role="button">Index</a>
         </div>
     </div>
 </div>
