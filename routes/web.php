@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PhotoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,24 +20,24 @@ Route::get('/', function () {
     return view('account');
 });
 
-Route::get('/index', function() {
+Route::get('/index', function () {
     return view('index');
 });
 
-Route::get('/account', function() {
+Route::get('/account', function () {
     return view('account');
 });
 
-Route::get('/perfil', function() {
+Route::get('/perfil', function () {
     return view('perfil');
 });
 
-Route::get('/post', function() {
+Route::get('/post', function () {
     return view('post');
 });
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
 
-Route::get('admin/home',[HomeController::class,'adminHome'])->name('admin.home')->middleware('is_admin');
-
+Route::post('save', [PhotoController::class, 'store'])->name('upload.picture');
