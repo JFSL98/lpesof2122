@@ -17,26 +17,18 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
     return view('account');
-});
-
-Route::get('/index', function() {
-    return view('index');
-});
-
-Route::get('/account', function() {
-    return view('account');
-});
+})->middleware('guest');
 
 Route::get('/perfil', function() {
     return view('perfil');
-});
+})->middleware('auth','verified');
 
 Route::get('/post', function() {
     return view('post');
-});
-Auth::routes();
+})->middleware('auth');
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Auth::routes(['verified' => true]);
+
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 Route::get('admin/home',[HomeController::class,'adminHome'])->name('admin.home')->middleware('is_admin');
-
