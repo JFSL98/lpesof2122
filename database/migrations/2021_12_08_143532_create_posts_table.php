@@ -17,6 +17,7 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->text('content');
+            $table->text('image_path');
             $table->timestamps();
         });
     }

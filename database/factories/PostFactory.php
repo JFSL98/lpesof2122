@@ -16,7 +16,8 @@ class PostFactory extends Factory
     {
         return [
             'user_id' => User::all()->random()->id,
-            'content' => $this->faker->sentence
+            'content' => $this->faker->sentence,
+            'image_path' => "default.jpg",
         ];
     }
 }
