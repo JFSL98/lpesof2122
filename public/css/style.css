@@ -1,13 +1,21 @@
-.btn{
-    background-color:#006037;
+.btn {
+    background-color: #006037;
     color: white;
 }
+
 .btn:hover {
     background-color: #007c04;
     color: white;
-  }
+}
 
-.card{
+.card {
     width: 500px;
     margin: auto;
+}
+
+.profile-pic {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 172px;
+    height: 172px;
 }
