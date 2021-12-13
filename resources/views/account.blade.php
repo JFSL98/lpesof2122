@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layouts.master')
 
 @section('content')
 <div class="container-lg d-flex justify-content-md-center align-items-center vh-100 text-center">
