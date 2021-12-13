@@ -35,7 +35,18 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        ]);
+
+        $name = $request->file('image')->getClientOriginalName();
+        $request->file('image')->store('public/images');
+
+        $picture = new Photo;
+        $picture->name = $name;
+        $picture->path = $request->file('image')->hashName();
+        $picture->save();
+        return redirect()->back()->with('status', 'Image Has been uploaded');
     }
 
     /**
