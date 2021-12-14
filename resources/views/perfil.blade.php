@@ -13,9 +13,9 @@
                         <img class="profile-pic" src="{{asset('storage/images/profile_pic/'.auth()->user()->profile_pic)}}" alt="Avatar">
                     </div>
                     <h1>
-                        {{Auth::user()->name}}
+                        {{$user->name}}
                     </h1>
-                    <small>{{Auth::user()->email}}<small>
+                    <small>{{$user->email}}<small>
                 </div>
             </div>
         </div>
