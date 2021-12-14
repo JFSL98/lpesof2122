@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+
 
 class HomeController extends Controller
 {
@@ -28,6 +30,13 @@ class HomeController extends Controller
 
     public function adminHome() {
         return view('adminHome');
+    }
+
+    public function viewProfile(User $user){
+
+        return view(view:'perfil', data:[
+            'user' => $user,
+        ]);
     }
 
 }
