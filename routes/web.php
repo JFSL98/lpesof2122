@@ -16,6 +16,8 @@ use App\Http\Controllers\PhotoController;
 |
 */
 
+Auth::routes(['verified' => true]);
+
 Route::get('/', function () {
     return view('account');
 })->middleware('guest');
