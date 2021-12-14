@@ -24,7 +24,7 @@ Route::get('/', function () {
 
 Route::get('/perfil', function () {
     return view('perfil');
-})->middleware('auth','verified');
+})->name('perfil')->middleware('auth','verified');
 
 Route::get('/post', function () {
     return view('post');
