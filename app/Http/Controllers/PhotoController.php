@@ -47,7 +47,6 @@ class PhotoController extends Controller
         $picture->path = $request->file('image')->hashName();
         $picture->save();
         $user = auth()->user();
-        $user->photos()->save($picture);
         return redirect()->back()->with('status', 'Image Has been uploaded');
     }
 
