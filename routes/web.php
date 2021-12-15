@@ -16,7 +16,7 @@ use App\Http\Controllers\PhotoController;
 |
 */
 
-Auth::routes(['verified' => true]);
+Auth::routes(['verify' => true]);
 
 Route::get('/', function () {
     return view('account');
@@ -24,7 +24,7 @@ Route::get('/', function () {
 
 Route::get('/perfil', function () {
     return view('perfil');
-})->name('perfil')->middleware('auth','verified');
+})->name('perfil')->middleware('auth');
 
 Route::get('/post', function () {
     return view('post');
@@ -35,4 +35,4 @@ Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home
 
 Route::post('save', [PhotoController::class, 'store'])->name('upload.picture');
 
-Route::get('user/{user}',[HomeController::class,'viewProfile']);
+Route::get('perfil/{user}',[HomeController::class,'viewProfile']);
