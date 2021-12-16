@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +24,7 @@ Route::get('/', function () {
     return view('account');
 })->middleware('guest');
 
-Route::get('/perfil', function () {
-    return view('perfil');
-})->name('perfil')->middleware('auth');
+Route::get('/perfil', [ProfileController::class, 'index'])->name('perfil');
 
 Route::get('/post', function () {
     return view('post');
@@ -37,4 +36,4 @@ Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home
 
 Route::post('save', [PhotoController::class, 'store'])->name('upload.picture');
 
-Route::get('perfil/{user}',[HomeController::class,'viewProfile']);
+Route::get('perfil/{user}',[ProfileController::class,'index']);

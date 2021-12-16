@@ -18,6 +18,7 @@
                     <small>{{$user->email}}<small>
                 </div>
             </div>
+            @include('partials.listposts')
         </div>
     </div>
 
