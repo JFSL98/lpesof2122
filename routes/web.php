@@ -24,7 +24,7 @@ Route::get('/', function () {
     return view('account');
 })->middleware('guest');
 
-Route::get('/perfil', [ProfileController::class, 'index'])->name('perfil');
+//Route::get('/perfil', [ProfileController::class, 'index'])->name('perfil');
 
 Route::get('/post', function () {
     return view('post');
@@ -36,4 +36,5 @@ Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home
 
 Route::post('save', [PhotoController::class, 'store'])->name('upload.picture');
 
-Route::get('perfil/{user}',[ProfileController::class,'index']);
+// Profile
+Route::get('/{user}',[ProfileController::class,'index']);

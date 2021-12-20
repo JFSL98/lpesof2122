@@ -35,7 +35,7 @@ class HomeController extends Controller
 
     public function viewProfile(User $user){
 
-        return view(view:'perfil', data:[
+        return view(view:'profile.index', data:[
             'user' => $user,
         ]);
     }

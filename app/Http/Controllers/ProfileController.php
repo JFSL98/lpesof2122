@@ -32,6 +32,6 @@ class ProfileController extends Controller
         
         $user = User::find($user_id);
         $posts = Post::all()->where('user_id', $user_id)->sortByDesc('created_at');
-        return view('perfil', compact('user','posts'));
+        return view('profile.index', compact('user','posts'));
     }
 }
