@@ -8,9 +8,8 @@
         </div>
         <div class="col">
             <h5 class="card-title">Bem-vindo!</h5>
-            <a class="btn" href="/login" role="button">Login</a>
-            <a class="btn" href="/register" role="button">Registar</a>
-            <a class="btn" href="/index" role="button">Index</a>
+            <a class="btn" href="{{ route('login') }}" role="button">Login</a>
+            <a class="btn" href="{{ route('register') }}" role="button">Registar</a>
         </div>
     </div>
 </div>
