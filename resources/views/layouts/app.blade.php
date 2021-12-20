@@ -32,10 +32,11 @@
 
 <body>
     <div id="app">
-        <main class="py-4">
+        <main class="py-4 container-lg d-flex justify-content-md-center align-items-center vh-100 text-center">
             @yield('content')
         </main>
     </div>
+    @include('includes.footer')
 </body>
 
 </html>

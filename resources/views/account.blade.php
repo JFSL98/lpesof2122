@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-<div class="container-lg d-flex justify-content-md-center align-items-center vh-100 text-center">
     <div class="row">
         <div class="col-6">
             <!-- logotipo UFP -->
@@ -12,8 +11,4 @@
             <a class="btn" href="{{ route('register') }}" role="button">Registar</a>
         </div>
     </div>
-</div>
-
-@include('includes.footer')
-
 @endsection
