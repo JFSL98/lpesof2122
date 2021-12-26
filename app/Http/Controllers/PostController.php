@@ -25,9 +25,12 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $post = new Post();
+        $post->content = $request['content'];
+        $request->user()->posts()->save($post);
+        return back()->withInput();
     }
 
     /**
@@ -81,8 +84,25 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
+    /*
     public function destroy(Post $post)
     {
-        //
+        
+        if ($post->user_id == Auth()->user()->id)
+        {
+            $post->delete();
+        }
+        return back()->withInput();
+    }*/
+
+    public function destroy(Request $request)
+    {
+        $post_id = $request['id'];
+        $post = Post::find($post_id);
+        if ($post->user->id == $request->user()->id)
+        {
+            $post->delete();
+        }
+        return back()->withInput();
     }
 }

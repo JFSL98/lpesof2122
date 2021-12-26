@@ -18,6 +18,9 @@
                     <small>{{$user->email}}<small>
                 </div>
             </div>
+            @if ($user == Auth()->user())
+            @include('partials.createpost')
+            @endif
             @include('partials.listposts')
         </div>
     </div>

@@ -38,3 +38,7 @@ Route::post('save', [PhotoController::class, 'store'])->name('upload.picture');
 
 // Profile
 Route::get('/{user}',[ProfileController::class,'index']);
+
+// Posts
+Route::post('/post/new', [PostController::class, 'create'])->name('post.create');
+Route::post('/post/remove/{id}', [PostController::class, 'destroy'])->name('post.remove');

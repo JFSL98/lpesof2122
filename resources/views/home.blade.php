@@ -20,6 +20,7 @@ Rede Alumni | Home
                     {{ __('You are logged in!') }}
                 </div>
             </div>
+            @include('partials.createpost')
             @include('partials.listposts')
         </div>
     </div>

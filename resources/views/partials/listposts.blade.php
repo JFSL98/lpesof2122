@@ -12,6 +12,12 @@
             </small>
         </p>
         <p class="card-text">{{ $post->content }}</p>
+        @if ($post->user_id === Auth()->user()->id)
+        <form method="POST" action="{{ route('post.remove', ['id' => $post->id]) }}">
+            @csrf
+            <button type="submit" class="btn btn-danger">Remover</button>
+        </form>
+        @endif
     </div>
 </div>
 @empty
