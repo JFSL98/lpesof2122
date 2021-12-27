@@ -45,3 +45,4 @@ Route::post('/{user}/upload', [PhotoController::class, 'store'])->name('upload.p
 Route::post('/post/new', [PostController::class, 'create'])->name('post.create');
 Route::post('/post/remove/{id}', [PostController::class, 'destroy'])->name('post.remove');
 
+Route::get('/{user}/new_profile_pic',[ProfileController::class,'pic'])->name('profile.upload_pic');

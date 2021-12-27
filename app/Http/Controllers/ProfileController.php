@@ -34,4 +34,11 @@ class ProfileController extends Controller
         $posts = Post::all()->where('user_id', $user_id)->sortByDesc('created_at');
         return view('profile.index', compact('user','posts'));
     }
+
+    public function pic(User $user){
+
+        return view(view:'profile.upload_pic', data:[
+            'user' => $user,
+        ]);
+    }
 }
