@@ -23,9 +23,10 @@
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="col-md-12">
                                 <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                            <!-- return button -->
+                                <a href="{{route("profile",$user->id)}}" class="btn btn-danger">Return</a>
                             </div>
                         </div>
                     </form>
