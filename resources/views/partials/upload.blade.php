@@ -1,4 +1,4 @@
-<form method="POST" enctype="multipart/form-data" id="upload-image" action="{{ route('upload.picture') }}">
+<form method="POST" enctype="multipart/form-data" id="upload-image" action="{{ route('upload.picture',auth()->user()->id) }}">
     @csrf
     <div class="row">
 

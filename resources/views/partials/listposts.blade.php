@@ -1,7 +1,14 @@
 @forelse ($posts as $post)
 <div class="card">
     <div class="card-body">
-        <img src="{{asset('storage/images/profile_pic/'.$post->user->profile_pic)}}" alt="user" class="rounded-circle" width="40" height="40">
+        @php
+            $user=$post->user;
+        @endphp
+        @if ($user->profile_pic==NULL)
+        <img class="rounded-circle profile-pic profile-pic-listposts" src="{{asset('storage/images/profile_pic/default.jpg')}}" alt="Avatar" >
+        @else
+        <img class="rounded-circle profile-pic profile-pic-listposts" src="{{asset('storage/images/profile_pic/'.$user->profile_pic->path)}}" alt="Avatar" >
+        @endif 
         <h5 class="card-title">{{ $post->user->name }}</h5>
         <p>
             <small>

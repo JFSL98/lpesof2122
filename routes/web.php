@@ -34,11 +34,14 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
 
-Route::post('save', [PhotoController::class, 'store'])->name('upload.picture');
+
 
 // Profile
 Route::get('/{user}',[ProfileController::class,'index']);
+Route::post('/{user}/upload', [PhotoController::class, 'store'])->name('upload.picture');
+
 
 // Posts
 Route::post('/post/new', [PostController::class, 'create'])->name('post.create');
 Route::post('/post/remove/{id}', [PostController::class, 'destroy'])->name('post.remove');
+

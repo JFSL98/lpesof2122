@@ -34,7 +34,11 @@
                 $user = auth()->user();
                 $profile_pic = $user->profile_pic;
                 @endphp
-                <img src="{{asset('storage/images/profile_pic/'.$profile_pic)}}" alt="user" class="rounded-circle" width="40" height="40">
+                 @if ($user->profile_pic==NULL)
+                 <img class="rounded-circle profile-pic profile-pic-header" src="{{asset('storage/images/profile_pic/default.jpg')}}" alt="Avatar" >
+                 @else
+                 <img class="rounded-circle profile-pic profile-pic-header" src="{{asset('storage/images/profile_pic/'.$user->profile_pic->path)}}" alt="Avatar" >
+                 @endif 
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }}
