@@ -37,7 +37,7 @@ Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home
 
 
 // Profile
-Route::get('/{user}',[ProfileController::class,'index']);
+Route::get('/{user}',[ProfileController::class,'index'])->name('profile');
 Route::post('/{user}/upload', [PhotoController::class, 'store'])->name('upload.picture');
 
 
