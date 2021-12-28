@@ -24,9 +24,8 @@ class PostController extends Controller
     public function single(Request $request)
     {
         $post = Post::find($request['id']);
-        $user = User::find($post->user_id);
 
-        return view('post', compact('post','user'));
+        return view('post', compact('post'));
     }
 
     /**
