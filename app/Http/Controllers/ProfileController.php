@@ -21,11 +21,6 @@ class ProfileController extends Controller
 
     public function index($user_id = NULL)
     {
-        // Substituir por um erro
-        /**
-         * Se o @param user_id for nulo ou não existir,
-         * redireciona para o perfil do user autenticado.
-         */
         if (!$user_id || User::all()->where('id', $user_id)->isEmpty()) {
             return redirect()->back()->with('A página que tentou visitar não existe.');
         }

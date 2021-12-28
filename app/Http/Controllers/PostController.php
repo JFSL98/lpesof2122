@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -18,6 +19,14 @@ class PostController extends Controller
 	    return view('partials.post', [
             'posts' => $posts,
         ]);
+    }
+
+    public function single(Request $request)
+    {
+        $post = Post::find($request['id']);
+        $user = User::find($post->user_id);
+
+        return view('post', compact('post','user'));
     }
 
     /**
