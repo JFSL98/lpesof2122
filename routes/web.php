@@ -24,8 +24,6 @@ Route::get('/', function () {
     return view('account');
 })->middleware('guest');
 
-//Route::get('/perfil', [ProfileController::class, 'index'])->name('perfil');
-
 Route::get('/post', function () {
     return view('post');
 })->middleware('auth');
@@ -39,10 +37,8 @@ Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home
 // Profile
 Route::get('/{user}',[ProfileController::class,'index'])->name('profile');
 Route::post('/{user}/upload', [PhotoController::class, 'store'])->name('upload.picture');
-
+Route::get('/{user}/new_profile_pic',[ProfileController::class,'pic'])->name('profile.upload_pic');
 
 // Posts
 Route::post('/post/new', [PostController::class, 'create'])->name('post.create');
 Route::post('/post/remove/{id}', [PostController::class, 'destroy'])->name('post.remove');
-
-Route::get('/{user}/new_profile_pic',[ProfileController::class,'pic'])->name('profile.upload_pic');

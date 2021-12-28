@@ -53,7 +53,7 @@ class PhotoController extends Controller
         $picture=Photo::where('path',$picture_path)->first();
         $user->profile_pic_id=$picture->id;
         $user->save();
-        return redirect()->back()->with('status', 'Image Has been uploaded');
+        return redirect()->route('profile',$user->id);
     }
 
     /**
