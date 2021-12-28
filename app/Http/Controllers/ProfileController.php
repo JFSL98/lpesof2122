@@ -27,7 +27,7 @@ class ProfileController extends Controller
          * redireciona para o perfil do user autenticado.
          */
         if (!$user_id || User::all()->where('id', $user_id)->isEmpty()) {
-            $user_id = Auth::user()->id;
+            return redirect()->back()->with('A página que tentou visitar não existe.');
         }
         
         $user = User::find($user_id);
