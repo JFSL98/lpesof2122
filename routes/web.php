@@ -35,11 +35,16 @@ Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home
 
 
 // Profile
-Route::get('/{user}',[ProfileController::class,'index'])->name('profile');
+Route::get('/{user}', [ProfileController::class, 'index'])->name('profile');
 Route::post('/{user}/upload', [PhotoController::class, 'store'])->name('upload.picture');
-Route::get('/{user}/new_profile_pic',[ProfileController::class,'pic'])->name('profile.upload_pic');
+Route::get('/{user}/new_profile_pic', [ProfileController::class, 'pic'])->name('profile.upload_pic');
 
 // Posts
-Route::get('/post/{id}',[PostController::class,'single'])->name('post.single');
+Route::get('/post/{id}', [PostController::class, 'single'])->name('post.single');
 Route::post('/post/new', [PostController::class, 'create'])->name('post.create');
 Route::post('/post/remove/{id}', [PostController::class, 'destroy'])->name('post.remove');
+
+// Comments
+Route::post('/post/comment/{id}', [PostController::class, 'comment'])->name('post.comment');
+Route::post('/post/comment/remove/{id}', [PostController::class, 'commentRemove'])->name('post.comment.remove');
+Route::post('/post/comment/add/{id}', [PostController::class, 'commentAdd'])->name('post.comment.add');
