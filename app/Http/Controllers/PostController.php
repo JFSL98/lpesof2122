@@ -111,6 +111,6 @@ class PostController extends Controller
         {
             $post->delete();
         }
-        return back()->withInput();
+        return back()->with('status','Post eliminado!');
     }
 }

@@ -6,6 +6,16 @@ Rede Alumni | Post
 
 @section('content')
 
+@if ($post == NULL)
+<div class="card">
+    <div class="card-body">
+        <div class="alert alert-warning" role="alert">
+            Este post não existe!
+          </div>
+    </div>
+</div>
+    
+@else
 <div class="card">
     <div class="card-header">
         @php
@@ -36,6 +46,7 @@ Rede Alumni | Post
         @endif
     </div>
 </div>
+@endif
 
 @include('includes.footer')
 @endsection
