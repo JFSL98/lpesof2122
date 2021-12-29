@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Models\PostComment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -111,6 +112,25 @@ class PostController extends Controller
         if ($post->user == $request->user()) {
             $post->delete();
         }
-        return back()->with('status','Post eliminado!');
+        return back()->with('status', 'Post eliminado!');
+    }
+
+    public function commentAdd(Request $request)
+    {
+        $post = Post::find($request['id']);
+        $post->Postcomments()->create([
+            'content' => $request['content'],
+            'user_id' => Auth::user()->id,
+        ]);
+        return back();
+    }
+
+    public function commentRemove(Request $request)
+    {
+        $comment = PostComment::find($request['id']);
+        if ($comment->user_id == Auth::user()->id) {
+            $comment->delete();
+        }
+        return back();
     }
 }
