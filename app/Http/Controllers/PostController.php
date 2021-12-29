@@ -108,8 +108,7 @@ class PostController extends Controller
     {
         $post_id = $request['id'];
         $post = Post::find($post_id);
-        $user = Auth::user();
-        if ($post->user->id == $user->id) {
+        if ($post->user == $request->user()) {
             $post->delete();
         }
         return back()->with('status','Post eliminado!');
