@@ -35,7 +35,6 @@
             <div class="card-header">
                 <h5 class="card-title">Comments</h5>
             </div>
-            @if (count($post->comments)>0)
             <div class="card-body">
                 @forelse ($post->comments as $comment)
                 <div class="card">
@@ -52,7 +51,6 @@
                 @empty
                 <p>No comments yet.</p>
                 @endforelse
-                @endif
             </div>
         </div>
         <form method="POST" action="{{ route('post.comment.add', ['id' => $post->id]) }}">
