@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -16,7 +17,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all(); //fetch all blog posts from DB
-	    return view('partials.post', [
+        return view('partials.post', [
             'posts' => $posts,
         ]);
     }
@@ -95,7 +96,7 @@ class PostController extends Controller
     /*
     public function destroy(Post $post)
     {
-        
+
         if ($post->user_id == Auth()->user()->id)
         {
             $post->delete();
@@ -107,8 +108,8 @@ class PostController extends Controller
     {
         $post_id = $request['id'];
         $post = Post::find($post_id);
-        if ($post->user->id == $request->user()->id)
-        {
+        $user = Auth::user();
+        if ($post->user->id == $user->id) {
             $post->delete();
         }
         return back()->with('status','Post eliminado!');
