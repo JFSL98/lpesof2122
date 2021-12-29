@@ -26,6 +26,17 @@
                     <small>{{$user->email}}<small>
                 </div>
             </div>
+
+            @if (session('status'))
+            <div class="card">
+                <div class="card-body">
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                </div>
+            </div>
+            @endif
+            
             @if ($user == Auth()->user())
             @include('partials.createpost')
             @endif
