@@ -6,7 +6,7 @@
                 <label for="content">Comment:</label>
                 <textarea class="form-control" rows="3" id="content" name="content"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Comment</button>
+            <input type="submit" class="btn btn-primary fas fa-chevron-circle-right" value="&#xf138;">
         </form>        
     </div>
 </div>

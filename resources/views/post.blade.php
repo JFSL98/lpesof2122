@@ -38,12 +38,20 @@ Rede Alumni | Post
     </div>
     <div class="card-body">
         <p class="card-text">{{ $post->content }}</p>
-        @if ($post->user_id === Auth()->user()->id)
-        <form method="POST" action="{{ route('post.remove', ['id' => $post->id]) }}">
-            @csrf
-            <button type="submit" class="btn btn-danger">Remover</button>
-        </form>
-        @endif
+
+        <div class="container">
+            <div class="row">
+                <div class="col-1">
+                    @if ($post->user_id === Auth()->user()->id)                
+                    <form method="POST" action="{{ route('post.remove', ['id' => $post->id]) }}">
+                        @csrf
+                        <input type="submit" class="btn btn-danger fas fa-trash-alt" value="&#xf2ed;">
+                    </form>
+                    @endif
+                </div>
+            </div>
+        </div>
+        
     </div>
 </div>
 

@@ -27,21 +27,21 @@
 
         <div class="container">
             <div class="row">
-                <div class="col">
-                    @if ($post->user_id === Auth()->user()->id)
+                <div class="col-1">
+                    <a class="btn btn-primary far fa-comment" href="{{ route('post.single',$post->id) }}"></a>
+                </div>
+                <div class="col-1">
+                    @if ($post->user_id === Auth()->user()->id)                
                     <form method="POST" action="{{ route('post.remove', ['id' => $post->id]) }}">
                         @csrf
-                        <button type="submit" class="btn btn-danger">Remover</button>
+                        <input type="submit" class="btn btn-danger fas fa-trash-alt" value="&#xf2ed;">
                     </form>
                     @endif
                 </div>
-                <div class="col">
-                    <div class="">
-                        <a class="btn btn-secondary" href="{{ route('post.single',$post->id) }}">Ver mais</a>
-                    </div>
-                </div>
             </div>
         </div>
+
+
     </div>
 </div>
 @empty

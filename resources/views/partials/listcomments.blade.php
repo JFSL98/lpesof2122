@@ -5,16 +5,22 @@
         <p><strong>{{$comment->user->name}}:</strong>
             {{ $comment->content }}</p>
         @if ($comment->user_id === Auth()->user()->id)
-        <div class="text-end">
-            <form method="POST" action="{{ route('post.comment.remove', ['id' => $comment->id]) }}">
-                @csrf
-                <button type="submit" class="btn btn-danger">Remover Comentario</button>
-            </form>
+        <div class="container">
+            <div class="row">
+                <div class="col-1">
+                    @if ($post->user_id === Auth()->user()->id)                
+                    <form method="POST" action="{{ route('post.comment.remove', ['id' => $comment->id]) }}">
+                        @csrf
+                        <input type="submit" class="btn btn-danger fas fa-trash-alt" value="&#xf2ed;">
+                    </form>
+                    @endif
+                </div>
+            </div>
         </div>
         @endif
     </div>
 </div>
 
 @empty
-<p>No comments yet.</p>
+<h5 class="text-center">No comments yet.</h5>
 @endforelse

@@ -9,7 +9,7 @@
                 </div>
 
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary" id="submit">Submeter</button>
+                    <input type="submit" class="btn btn-primary fas fa-chevron-circle-right" value="&#xf138;">
                 </div>
             </div>
         </form>
