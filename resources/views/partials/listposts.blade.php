@@ -14,7 +14,6 @@
             @endif
             <h5 class="card-title">{{ $post->user->name }}</h5>
         </a>
-
         <small>
             posted at {{ $post->created_at }}
             @if ($post->created_at != $post->updated_at)
@@ -27,10 +26,10 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-1">
-                    <a class="btn btn-primary far fa-comment" href="{{ route('post.single',$post->id) }}"></a>
+                <div class="col-md">
+                    <a class="btn btn-primary far fa-comment" href="{{ route('post.single',$post->id) }}">{{$post->getCommentCount()}}</a>
                 </div>
-                <div class="col-1">
+                <div class="col-md">
                     @if ($post->user_id === Auth()->user()->id)                
                     <form method="POST" action="{{ route('post.remove', ['id' => $post->id]) }}">
                         @csrf

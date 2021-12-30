@@ -38,10 +38,12 @@ Rede Alumni | Post
     </div>
     <div class="card-body">
         <p class="card-text">{{ $post->content }}</p>
-
         <div class="container">
             <div class="row">
-                <div class="col-1">
+                <div class="col-md-4">
+                    <i class="btn btn-primary far fa-comment"> {{ $commentcount }}</i>
+                </div>
+                <div class="col-md-4">
                     @if ($post->user_id === Auth()->user()->id)                
                     <form method="POST" action="{{ route('post.remove', ['id' => $post->id]) }}">
                         @csrf

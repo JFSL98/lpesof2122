@@ -31,8 +31,9 @@ class PostController extends Controller
         }
 
         $comments = PostComment::all()->where('post_id', '=', $post->id)->sortByDesc('created_at');
+        $commentcount = $post->getCommentCount();
 
-        return view('post', compact('post','comments'));
+        return view('post', compact('post','comments','commentcount'));
     }
 
     /**

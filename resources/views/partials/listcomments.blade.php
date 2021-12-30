@@ -3,7 +3,13 @@
 <div class="card">
     <div class="card-body">
         <p><strong>{{$comment->user->name}}:</strong>
-            {{ $comment->content }}</p>
+            {{ $comment->content }}</p>     
+            <small>
+                posted at {{ $comment->created_at }}
+                @if ($comment->created_at != $comment->updated_at)
+                , edited at {{ $comment->updated_at }}
+                @endif
+            </small>
         @if ($comment->user_id === Auth()->user()->id)
         <div class="container">
             <div class="row">
@@ -17,13 +23,7 @@
                 </div>          
             </div>
         </div>
-        @endif
-        <small>
-            posted at {{ $comment->created_at }}
-            @if ($comment->created_at != $comment->updated_at)
-            , edited at {{ $comment->updated_at }}
-            @endif
-        </small>
+        @endif   
     </div>
 </div>
 
