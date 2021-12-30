@@ -46,7 +46,10 @@ Rede Alumni | Post
         @endif
     </div>
 </div>
+
+@include('partials.createcomment')
+@include('partials.listcomments')
+
 @endif
 
-@include('includes.footer')
 @endsection
