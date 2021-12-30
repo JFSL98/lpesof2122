@@ -26,8 +26,13 @@ class PostController extends Controller
     public function single(Request $request)
     {
         $post = Post::find($request['id']);
+        if (!$post) {
+            return view('post', compact('post'));
+        }
 
-        return view('post', compact('post'));
+        $comments = PostComment::all()->where('post_id', '=', $post->id)->sortByDesc('created_at');
+
+        return view('post', compact('post','comments'));
     }
 
     /**
@@ -109,28 +114,16 @@ class PostController extends Controller
     {
         $post_id = $request['id'];
         $post = Post::find($post_id);
+
         if ($post->user == $request->user()) {
             $post->delete();
         }
-        return back()->with('status', 'Post eliminado!');
-    }
 
-    public function commentAdd(Request $request)
-    {
-        $post = Post::find($request['id']);
-        $post->Postcomments()->create([
-            'content' => $request['content'],
-            'user_id' => Auth::user()->id,
-        ]);
-        return back();
-    }
-
-    public function commentRemove(Request $request)
-    {
-        $comment = PostComment::find($request['id']);
-        if ($comment->user_id == Auth::user()->id) {
+        $comments = PostComment::all()->where('post_id', '=', $post_id);
+        foreach($comments as $comment) {
             $comment->delete();
         }
-        return back();
+        
+        return back()->with('status', 'Post eliminado!');
     }
 }

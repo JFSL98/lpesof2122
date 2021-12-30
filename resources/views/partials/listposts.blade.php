@@ -24,49 +24,26 @@
     </div>
     <div class="card-body">
         <p class="card-text">{{ $post->content }}</p>
-        @if ($post->user_id === Auth()->user()->id)
-        <form method="POST" action="{{ route('post.remove', ['id' => $post->id]) }}">
-            @csrf
-            <button type="submit" class="btn btn-danger">Remover</button>
-        </form>
-        @endif
-        <!--
-            comment section
-        -->
 
-        <h5>Comments</h5>
-        @forelse ($post->postcomments as $comment)
-
-        <p><b>{{$comment->user->name}}:</b>
-        {{ $comment->content }}</p>
-        @if ($comment->user_id === Auth()->user()->id)
-        <form method="POST" action="{{ route('post.comment.remove', ['id' => $comment->id]) }}">
-            @csrf
-            <button type="submit" class="btn btn-danger">Remover Comentario</button>
-        </form>
-        @endif
-
-
-        @empty
-        <p>No comments yet.</p>
-        @endforelse
-
-        <form method="POST" action="{{ route('post.comment.add', ['id' => $post->id]) }}">
-            @csrf
-            <div class="form-group">
-                <label for="content">Comment:</label>
-                <textarea class="form-control" rows="3" id="content" name="content"></textarea>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    @if ($post->user_id === Auth()->user()->id)
+                    <form method="POST" action="{{ route('post.remove', ['id' => $post->id]) }}">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Remover</button>
+                    </form>
+                    @endif
+                </div>
+                <div class="col">
+                    <div class="">
+                        <a class="btn btn-secondary" href="{{ route('post.single',$post->id) }}">Ver mais</a>
+                    </div>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Comment</button>
-        </form>
-
-
-        <div class="text-end">
-            <a class="btn btn-secondary" href="{{ route('post.single',$post->id) }}">Ver mais</a>
         </div>
     </div>
-
 </div>
 @empty
 <h5 class="text-center">Nothing to see here!</h3>
-    @endforelse
+@endforelse

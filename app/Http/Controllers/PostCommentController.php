@@ -22,9 +22,15 @@ class PostCommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $comment = new PostComment();
+        $comment->post_id = $request['post_id'];
+        $comment->user_id = $request->user()->id;
+        $comment->content = $request['content'];
+        $comment->save();
+        return back()->with('Comentário enviado!');
+        
     }
 
     /**
@@ -78,8 +84,12 @@ class PostCommentController extends Controller
      * @param  \App\Models\PostComment  $postComment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PostComment $postComment)
+    public function destroy(Request $request)
     {
-        //
+        $comment = PostComment::find($request['id']);
+        if ($comment->user == $request->user()) {
+            $comment->delete();
+        }
+        return back();
     }
 }
