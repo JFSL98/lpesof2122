@@ -10,18 +10,30 @@
                 , edited at {{ $comment->updated_at }}
                 @endif
             </small>
-        @if ($comment->user_id === Auth()->user()->id || $post->user_id === Auth()->user()->id)
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md">
+                    <form method="POST" action="{{ route('post.comment.like', ['id' => $comment->id, 'like_dislike' => true]) }}">
+                        @csrf
+                        <input type="submit" class="btn btn-primary fas fa-thumbs-up" value="&#xf164; {{ $comment->getLikeCount() }}">
+                    </form>
+                </div>
+                <div class="col-md">
+                    <form method="POST" action="{{ route('post.like', ['id' => $comment->id, 'like_dislike' => false]) }}">
+                        @csrf
+                        <input type="submit" class="btn btn-primary fas fa-thumbs-down" value="&#xf165; {{ $comment->getDislikeCount() }}">
+                    </form>
+                </div>
+                @if ($comment->user_id === Auth()->user()->id || $post->user_id === Auth()->user()->id)
+                <div class="col-md">
                     <form method="POST" action="{{ route('post.comment.remove', ['comment_id' => $comment->id]) }}">
                         @csrf
                         <input type="submit" class="btn btn-danger fas fa-trash-alt" value="&#xf2ed;">
                     </form>
-                </div>          
+                </div>
+                @endif
             </div>
         </div>
-        @endif   
     </div>
 </div>
 

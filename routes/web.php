@@ -49,3 +49,4 @@ Route::post('/post/like', [PostController::class, 'like'])->name('post.like');
 // Comments
 Route::post('/post/comment/new', [PostCommentController::class, 'create'])->name('post.comment.add');
 Route::post('/post/comment/remove', [PostCommentController::class, 'destroy'])->name('post.comment.remove');
+Route::post('/post/comment/like', [PostCommentController::class, 'like'])->name('post.comment.like');

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CommentLike;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\PostComment;
@@ -21,5 +22,6 @@ class DatabaseSeeder extends Seeder
         Post::factory(100)->create();
         PostComment::factory(200)->create();
         PostLike::factory(500)->create();
+        CommentLike::factory(500)->create();
     }
 }

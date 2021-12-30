@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CommentLike;
 use App\Models\PostComment;
 use Illuminate\Http\Request;
 
@@ -91,5 +92,39 @@ class PostCommentController extends Controller
             $comment->delete();
         }
         return back();
+    }
+
+    public function like(Request $request)
+    {
+        $user = $request->user();
+
+        $comment_id = $request['id'];
+
+        $comment = PostComment::find($comment_id);
+        
+        if ($comment) {
+            $like_dislike = $request['like_dislike'];
+            $comment_like = CommentLike::all()->where('user_id', '=', $user->id)->where('post_comment_id', '=', $comment_id)->first();
+            if ($comment_like)
+            {
+                if ($comment_like->like_dislike == $like_dislike) {
+                    $comment_like->delete();
+                }
+                else
+                {
+                    $comment_like->like_dislike = $like_dislike;
+                    $comment_like->save();
+                }
+            }
+            else
+            {
+                $comment_like = new CommentLike();
+                $comment_like->user_id = $user->id;
+                $comment_like->post_comment_id = $comment_id;
+                $comment_like->like_dislike = $like_dislike;
+                $comment_like->save();
+            }
+        }
+        return back()->withInput();
     }
 }
