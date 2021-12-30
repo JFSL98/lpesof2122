@@ -12,12 +12,18 @@
                     <form method="POST" action="{{ route('post.comment.remove', ['id' => $comment->id]) }}">
                         @csrf
                         <input type="submit" class="btn btn-danger fas fa-trash-alt" value="&#xf2ed;">
-                    </form>
+                    </form>                  
                     @endif
-                </div>
+                </div>          
             </div>
         </div>
         @endif
+        <small>
+            posted at {{ $comment->created_at }}
+            @if ($comment->created_at != $comment->updated_at)
+            , edited at {{ $comment->updated_at }}
+            @endif
+        </small>
     </div>
 </div>
 
