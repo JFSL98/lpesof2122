@@ -27,10 +27,22 @@
         <div class="container">
             <div class="row">
                 <div class="col-md">
-                    <a class="btn btn-primary far fa-comment" href="{{ route('post.single',$post->id) }}">{{$post->getCommentCount()}}</a>
+                    <form method="POST" action="{{ route('post.like', ['id' => $post->id, 'like_dislike' => true]) }}">
+                        @csrf
+                        <input type="submit" class="btn btn-primary fas fa-thumbs-up" value="&#xf164; {{ $post->getLikeCount() }}">
+                    </form>
                 </div>
                 <div class="col-md">
-                    @if ($post->user_id === Auth()->user()->id)                
+                    <form method="POST" action="{{ route('post.like', ['id' => $post->id, 'like_dislike' => false]) }}">
+                        @csrf
+                        <input type="submit" class="btn btn-primary fas fa-thumbs-down" value="&#xf165; {{ $post->getDislikeCount() }}">
+                    </form>
+                </div>
+                <div class="col-md">
+                    <a class="btn btn-primary far fa-comment" href="{{ route('post.single',$post->id) }}"> {{$post->getCommentCount()}}</a>
+                </div>
+                <div class="col-md">
+                    @if ($post->user_id === Auth()->user()->id)                    
                     <form method="POST" action="{{ route('post.remove', ['id' => $post->id]) }}">
                         @csrf
                         <input type="submit" class="btn btn-danger fas fa-trash-alt" value="&#xf2ed;">

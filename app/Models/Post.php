@@ -24,9 +24,23 @@ class Post extends Model
         return $this->hasMany(PostComment::class);
     }
 
-    public function getCommentCount(){
+    public function likes()
+    {
+        return $this->hasMany(PostLike::class);
+    }
 
-        $comment_count = $this->postComments()->count();       
-        return $comment_count;
+    public function getCommentCount()
+    {
+        return $this->postComments()->count();
+    }
+
+    public function getLikeCount()
+    {
+        return $this->likes()->getQuery()->where('like_dislike', '=', true)->count();
+    }
+
+    public function getDislikeCount()
+    {
+        return $this->likes()->getQuery()->where('like_dislike', '=', false)->count();
     }
 }

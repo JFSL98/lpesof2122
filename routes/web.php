@@ -43,8 +43,9 @@ Route::get('/{user}/profile_pic/new', [ProfileController::class, 'pic'])->name('
 // Posts
 Route::get('/post/{id}', [PostController::class, 'single'])->name('post.single');
 Route::post('/post/new', [PostController::class, 'create'])->name('post.create');
-Route::post('/post/remove/{id}', [PostController::class, 'destroy'])->name('post.remove');
+Route::post('/post/remove', [PostController::class, 'destroy'])->name('post.remove');
+Route::post('/post/like', [PostController::class, 'like'])->name('post.like');
 
 // Comments
-Route::post('/post/{post_id}/comment/new', [PostCommentController::class, 'create'])->name('post.comment.add');
-Route::post('/post/comment/remove/{id}', [PostCommentController::class, 'destroy'])->name('post.comment.remove');
+Route::post('/post/comment/new', [PostCommentController::class, 'create'])->name('post.comment.add');
+Route::post('/post/comment/remove', [PostCommentController::class, 'destroy'])->name('post.comment.remove');

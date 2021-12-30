@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\PostComment;
+use App\Models\PostLike;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -126,5 +127,39 @@ class PostController extends Controller
         }
         
         return back()->with('status', 'Post eliminado!');
+    }
+
+    public function like(Request $request)
+    {
+        $user = $request->user();
+
+        $post_id = $request['id'];
+
+        $post = Post::find($post_id);
+        
+        if ($post) {
+            $like_dislike = $request['like_dislike'];
+            $post_like = PostLike::all()->where('user_id', '=', $user->id)->where('post_id', '=', $post_id)->first();
+            if ($post_like)
+            {
+                if ($post_like->like_dislike == $like_dislike) {
+                    $post_like->delete();
+                }
+                else
+                {
+                    $post_like->like_dislike = $like_dislike;
+                    $post_like->save();
+                }
+            }
+            else
+            {
+                $post_like = new PostLike();
+                $post_like->user_id = $user->id;
+                $post_like->post_id = $post_id;
+                $post_like->like_dislike = $like_dislike;
+                $post_like->save();
+            }
+        }
+        return back()->withInput();
     }
 }

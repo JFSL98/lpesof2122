@@ -86,7 +86,7 @@ class PostCommentController extends Controller
      */
     public function destroy(Request $request)
     {
-        $comment = PostComment::find($request['id']);
+        $comment = PostComment::find($request['comment_id']);
         if ($comment->user == $request->user()) {
             $comment->delete();
         }

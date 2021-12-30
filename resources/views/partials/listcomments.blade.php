@@ -10,16 +10,14 @@
                 , edited at {{ $comment->updated_at }}
                 @endif
             </small>
-        @if ($comment->user_id === Auth()->user()->id)
+        @if ($comment->user_id === Auth()->user()->id || $post->user_id === Auth()->user()->id)
         <div class="container">
             <div class="row">
-                <div class="col-1">
-                    @if ($post->user_id === Auth()->user()->id)                
-                    <form method="POST" action="{{ route('post.comment.remove', ['id' => $comment->id]) }}">
+                <div class="col-md-4">
+                    <form method="POST" action="{{ route('post.comment.remove', ['comment_id' => $comment->id]) }}">
                         @csrf
                         <input type="submit" class="btn btn-danger fas fa-trash-alt" value="&#xf2ed;">
-                    </form>                  
-                    @endif
+                    </form>
                 </div>          
             </div>
         </div>
