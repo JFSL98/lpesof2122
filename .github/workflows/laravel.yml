@@ -11,15 +11,11 @@ jobs:
 
     runs-on: ubuntu-latest
     
-    #services:
-      #mysql:
-        #image: mysql:latest
-        #env:
-          #MYSQL_ALLOW_EMPTY_PASSWORD: true
-          #MYSQL_DATABASE: laravel
-        #ports:
-          #- 3306/tcp
-        #options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    env:
+      DB_DATABASE: laravel
+      DB_USER: root
+      DB_PASSWORD: root
 
     steps:
     - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
@@ -43,10 +39,15 @@ jobs:
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
       
-    - name: Create Database
+    - name: Set up MySQL
       run: |
-        mkdir -p database
-        touch database/database.sqlite
+        sudo /etc/init.d/mysql start
+        mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+      
+    #- name: Create Database
+      #run: |
+        #mkdir -p database
+        #touch database/database.sqlite
     - name: Run migrations
       run: php artisan migrate
     - name: Execute tests (Unit and Feature tests) via PHPUnit
