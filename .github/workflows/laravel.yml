@@ -27,6 +27,10 @@ jobs:
 
     - name: Setup MySQL
       uses: mirromutth/mysql-action@v1.1
+      with:
+        mysql database: 'laravel'
+        mysql user: 'root'
+        
     #- name: Create Database
     #  run: |
     #    mkdir -p database
