@@ -19,7 +19,7 @@
                     </form>
                 </div>
                 <div class="col-md">
-                    <form method="POST" action="{{ route('post.like', ['id' => $comment->id, 'like_dislike' => false]) }}">
+                    <form method="POST" action="{{ route('post.comment.like', ['id' => $comment->id, 'like_dislike' => false]) }}">
                         @csrf
                         <input type="submit" class="btn btn-primary fas fa-thumbs-down" value="&#xf165; {{ $comment->getDislikeCount() }}">
                     </form>
