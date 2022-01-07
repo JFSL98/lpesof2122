@@ -37,7 +37,7 @@
             </div>
             @endif
             
-            @if ($user == Auth()->user())
+            @if ($user->id == Auth()->user()->id)
             @include('partials.createpost')
             @endif
             @include('partials.listposts')
