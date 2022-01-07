@@ -15,7 +15,12 @@ Rede Alumni | Post
     </div>
 </div>
     
+
 @else
+@php
+$likes = $post->likes;
+$like = $likes->where('user_id', '=', Auth()->user()->id)->first();
+@endphp
 <div class="card">
     <div class="card-header">
         @php
@@ -43,13 +48,21 @@ Rede Alumni | Post
                 <div class="col-md-3">
                     <form method="POST" action="{{ route('post.like', ['id' => $post->id, 'like_dislike' => true]) }}">
                         @csrf
+                        @if($like == NULL||$like->like_dislike==0)
                         <input type="submit" class="btn btn-primary fas fa-thumbs-up" value="&#xf164; {{ $post->getLikeCount() }}">
+                        @else
+                        <input type="submit" class="btn btn-success fas fa-thumbs-up" value="&#xf164; {{ $post->getLikeCount() }}">
+                        @endif
                     </form>
                 </div>
                 <div class="col-md-3">
                     <form method="POST" action="{{ route('post.like', ['id' => $post->id, 'like_dislike' => false]) }}">
                         @csrf
+                        @if ($like == NULL||$like->like_dislike==1)
                         <input type="submit" class="btn btn-primary fas fa-thumbs-down" value="&#xf165; {{ $post->getDislikeCount() }}">
+                        @else
+                        <input type="submit" class="btn btn-danger fas fa-thumbs-down" value="&#xf165; {{ $post->getDislikeCount() }}">
+                        @endif
                     </form>
                 </div>
                 <div class="col-md-3">
