@@ -23,7 +23,11 @@ class PostController extends Controller
             'posts' => $posts,
         ]);
     }
-
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function single(Request $request)
     {
         $post = Post::find($request['id']);
@@ -128,7 +132,11 @@ class PostController extends Controller
         
         return back()->with('status', 'Post eliminado!');
     }
-
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function like(Request $request)
     {
         $user = $request->user();

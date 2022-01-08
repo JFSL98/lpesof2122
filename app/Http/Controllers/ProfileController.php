@@ -19,6 +19,11 @@ class ProfileController extends Controller
         $this->middleware(['auth', 'verified']);
     }
 
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function index($user_id = NULL)
     {
         if (!$user_id || User::all()->where('id', $user_id)->isEmpty()) {
@@ -30,6 +35,11 @@ class ProfileController extends Controller
         return view('profile.index', compact('user','posts'));
     }
 
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function pic(User $user){
 
         return view(view:'profile.upload_pic', data:[

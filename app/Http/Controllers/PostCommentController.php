@@ -93,7 +93,11 @@ class PostCommentController extends Controller
         }
         return back();
     }
-
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function like(Request $request)
     {
         $user = $request->user();
