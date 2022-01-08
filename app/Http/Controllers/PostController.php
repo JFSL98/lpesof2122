@@ -24,9 +24,9 @@ class PostController extends Controller
         ]);
     }
     /**
-     * Create a new controller instance.
+     * Apresenta a view de um post com respetivos comentários
      *
-     * @return void
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function single(Request $request)
     {
@@ -42,8 +42,9 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
+     * Formulário de criação de posts.
+     * 
+     * @param  \Illuminate\Http\Request  $request recebe conteúdo do post
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
@@ -99,12 +100,7 @@ class PostController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
+    
     /*
     public function destroy(Post $post)
     {
@@ -115,7 +111,13 @@ class PostController extends Controller
         }
         return back()->withInput();
     }*/
-
+    
+    /**
+     * Remove o post e todos os comentários associados.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Request $request)
     {
         $post_id = $request['id'];
@@ -133,9 +135,10 @@ class PostController extends Controller
         return back()->with('status', 'Post eliminado!');
     }
     /**
-     * Create a new controller instance.
+     * Adiciona um like ou dislike a um post
      *
-     * @return void
+     * @param  \Illuminate\Http\Request  $request com id do post e boolean (like ou dislike)
+     * @return \Illuminate\Http\Response
      */
     public function like(Request $request)
     {

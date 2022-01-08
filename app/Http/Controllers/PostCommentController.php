@@ -19,9 +19,10 @@ class PostCommentController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Formulário de criação de comentários nos posts.
+     * 
+     * @param  \Illuminate\Http\Request  $request recebe id do post e conteúdo do comentário
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function create(Request $request)
     {
@@ -80,10 +81,10 @@ class PostCommentController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove o comentário
      *
-     * @param  \App\Models\PostComment  $postComment
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Request $request)
     {
@@ -94,9 +95,10 @@ class PostCommentController extends Controller
         return back();
     }
     /**
-     * Create a new controller instance.
+     * Adiciona um like ou dislike a um comentário
      *
-     * @return void
+     * @param  \Illuminate\Http\Request  $request com id do comentário e boolean (like ou dislike)
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function like(Request $request)
     {

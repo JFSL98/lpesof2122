@@ -19,7 +19,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Apresenta a home page com todos os posts por ordem decrescente de data
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -29,15 +29,12 @@ class HomeController extends Controller
         return view('home', compact('posts'));
     }
 
+    /**
+     * Apresenta a home page do administrador
+     * 
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function adminHome() {
         return view('adminHome');
     }
-
-    public function viewProfile(User $user){
-
-        return view(view:'profile.index', data:[
-            'user' => $user,
-        ]);
-    }
-
 }

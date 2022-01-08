@@ -29,10 +29,10 @@ class PhotoController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guarda foto de perfil de utilizador e associa-a ao mesmo
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
