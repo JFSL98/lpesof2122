@@ -35,7 +35,7 @@ class PostController extends Controller
             return view('post', compact('post'));
         }
 
-        $comments = PostComment::all()->where('post_id', '=', $post->id)->sortByDesc('created_at');
+        $comments = $post->postComments->sortByDesc('created_at');
         $commentcount = $post->getCommentCount();
 
         return view('post', compact('post','comments','commentcount'));
@@ -123,16 +123,17 @@ class PostController extends Controller
         $post_id = $request['id'];
         $post = Post::find($post_id);
 
-        if ($post->user == $request->user()) {
+        if ($post && $post->user == $request->user())
+        {
             $post->delete();
+            $comments = PostComment::all()->where('post_id', '=', $post_id);
+            foreach($comments as $comment) {
+                $comment->delete();
+            }
+            return back()->with('status', 'Post eliminado!');
         }
 
-        $comments = PostComment::all()->where('post_id', '=', $post_id);
-        foreach($comments as $comment) {
-            $comment->delete();
-        }
-        
-        return back()->with('status', 'Post eliminado!');
+        return back()->with('status', 'Post não eliminado!');
     }
     /**
      * Adiciona um like ou dislike a um post
