@@ -36,17 +36,19 @@ Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home
 
 
 // Profile
-Route::get('/{user}', [ProfileController::class, 'index'])->name('profile');
-Route::post('/{user}/upload', [PhotoController::class, 'store'])->name('upload.picture');
-Route::get('/{user}/profile_pic/new', [ProfileController::class, 'pic'])->name('profile.upload_pic');
+Route::get('/{user}', [ProfileController::class, 'index'])->name('profile')->middleware('auth');
+Route::post('/{user}/upload', [PhotoController::class, 'store'])->name('upload.picture')->middleware('auth');
+Route::get('/{user}/profile_pic/new', [ProfileController::class, 'pic'])->name('profile.upload_pic')->middleware('auth');
 
 // Posts
-Route::get('/post/{id}', [PostController::class, 'single'])->name('post.single');
-Route::post('/post/new', [PostController::class, 'create'])->name('post.create');
-Route::post('/post/remove', [PostController::class, 'destroy'])->name('post.remove');
-Route::post('/post/like', [PostController::class, 'like'])->name('post.like');
+Route::get('/post/{id}', [PostController::class, 'single'])->name('post.single')->middleware('auth');
+Route::post('/post/new', [PostController::class, 'create'])->name('post.create')->middleware('auth');
+Route::post('/post/remove', [PostController::class, 'destroy'])->name('post.remove')->middleware('auth');
+Route::post('/post/like', [PostController::class, 'like'])->name('post.like')->middleware('auth');
 
 // Comments
-Route::post('/post/comment/new', [PostCommentController::class, 'create'])->name('post.comment.add');
-Route::post('/post/comment/remove', [PostCommentController::class, 'destroy'])->name('post.comment.remove');
-Route::post('/post/comment/like', [PostCommentController::class, 'like'])->name('post.comment.like');
+Route::post('/post/comment/new', [PostCommentController::class, 'create'])->name('post.comment.add')->middleware('auth');
+Route::post('/post/comment/remove', [PostCommentController::class, 'destroy'])->name('post.comment.remove')->middleware('auth');
+Route::post('/post/comment/like', [PostCommentController::class, 'like'])->name('post.comment.like')->middleware('auth');
+
+// Add friends
