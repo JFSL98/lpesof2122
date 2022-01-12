@@ -20,44 +20,8 @@ class Friends extends Model
         return $this->hasMany(User::class);
     }
 
-    public function getLikeCount()
+    public function friend()
     {
-        return $this->user()->getQuery()->where('validate', '=', true)->count();
-    }
-
-    function friendsOfMine()
-    {
-        return $this->belongsToMany('User', 'Friends', 'user_id', 'user2')
-            ->wherePivot('validate', '=', 1) // to filter only accepted
-            ->withPivot('validate'); // or to fetch accepted value
-    }
-
-    function friendOf()
-    {
-        return $this->belongsToMany('User', 'Friends', 'friend_id', 'user_id')
-            ->wherePivot('validate', '=', 1)
-            ->withPivot('validate');
-    }
-
-    // accessor allowing you call $user->friends
-    public function getFriendsAttribute()
-    {
-        if (!array_key_exists('friends', $this->relations)) $this->loadFriends();
-
-        return $this->getRelation('friends');
-    }
-
-    protected function loadFriends()
-    {
-        if (!array_key_exists('friends', $this->relations)) {
-            $friends = $this->mergeFriends();
-
-            $this->setRelation('friends', $friends);
-        }
-    }
-
-    protected function mergeFriends()
-    {
-        return $this->friendsOfMine->merge($this->friendOf);
+        return $this->hasMany(User::class);
     }
 }

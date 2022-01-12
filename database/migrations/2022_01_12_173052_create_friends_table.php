@@ -19,6 +19,8 @@ class CreateFriendsTable extends Migration
             $table->foreignId('friend_id');
             $table->boolean('validate');
             $table->unique(['user_id', 'friend_id']);
+            $table->foreign('friend_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

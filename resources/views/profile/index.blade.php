@@ -42,6 +42,9 @@
                         </form>
                         @endif
                         @endif
+                    </br>
+                    friends: {{$user->getFriendsCount()}}
+                    following: {{$user->getFollowingsCount()}}
                 </div>
             </div>
 

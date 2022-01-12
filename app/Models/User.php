@@ -71,7 +71,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function friends()
     {
-        return $this->hasMany(Friends::class);
+        return $this->belongsToMany(User::class, 'friends', 'user_id', 'friend_id');
     }
 
     public function isFollowing($user_id)
@@ -82,5 +82,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function UWvalidate($user_id)
     {
         return $this->friends()->where('friend_id', $user_id)->where('validate', true)->exists();
+    }
+
+    public function getFriendsCount()
+    {
+        return $this->friends()->where('validate', '=', true)->count();
+    }
+
+    //get followers count
+    public function getFollowingsCount()
+    {
+        return $this->friends()->where('validate', '=', false)->count();
     }
 }
