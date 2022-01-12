@@ -24,6 +24,24 @@
                         {{$user->name}}
                     </h1>
                     <small>{{$user->email}}<small>
+                        @if($user->id != Auth()->user()->id)
+                        @if(!Auth()->user()->isFollowing($user->id) && !Auth()->user()->UWvalidate($user->id))
+                        <form action="{{route('friend.add',['friend_id' => $user->id, 'user'])}}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">Add Friend</button>
+                        </form>
+                        @elseif (Auth()->user()->UWvalidate($user->id))
+                        <form action="{{route('friend.remove',['friend_id' => $user->id, 'user'])}}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Remove Friend</button>
+                        </form>
+                        @elseif (Auth()->user()->isFollowing($user->id))
+                        <form action="{{route('friend.remove',['friend_id' => $user->id, 'user'])}}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-warning">Unfollow Friend</button>
+                        </form>
+                        @endif
+                        @endif
                 </div>
             </div>
 
@@ -36,7 +54,7 @@
                 </div>
             </div>
             @endif
-            
+
             @if ($user->id == Auth()->user()->id)
             @include('partials.createpost')
             @endif

@@ -15,10 +15,10 @@ class CreateFriendsTable extends Migration
     {
         Schema::create('friends', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id1');
-            $table->foreignId('user_id2');
+            $table->foreignId('user_id');
+            $table->foreignId('friend_id');
             $table->boolean('validate');
-            //$table->unique(['user_id1', 'user_id2']);
+            $table->unique(['user_id', 'friend_id']);
             $table->timestamps();
         });
     }

@@ -16,9 +16,6 @@ class FriendsFactory extends Factory
     {
         return [
             //
-            'user_id1' => User::all()->random()->id,
-            'user_id2' => User::all()->random()->id,
-            'validate' => $this->faker->boolean(),
         ];
     }
 }

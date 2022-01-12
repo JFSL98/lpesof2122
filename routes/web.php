@@ -7,6 +7,8 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostCommentController;
+use App\Http\Controllers\FriendsController;
+use App\Models\Friends;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,4 +53,6 @@ Route::post('/post/comment/new', [PostCommentController::class, 'create'])->name
 Route::post('/post/comment/remove', [PostCommentController::class, 'destroy'])->name('post.comment.remove')->middleware('auth');
 Route::post('/post/comment/like', [PostCommentController::class, 'like'])->name('post.comment.like')->middleware('auth');
 
-// Add friends
+// Friends
+Route::post('/{user}/friend/new', [FriendsController::class, 'create'])->name('friend.add')->middleware('auth');
+Route::post('/{user}/friend/remove', [FriendsController::class, 'destroy'])->name('friend.remove')->middleware('auth');

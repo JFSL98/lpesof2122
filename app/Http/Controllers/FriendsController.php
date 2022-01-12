@@ -27,12 +27,17 @@ class FriendsController extends Controller
      */
     public function create(Request $request)
     {
-        //
-        $friend = new Friends();
-        $friend->user_id2 = $request['user_id'];
-        $friend->user_id1 = $request->user()->id;
-        $friend->validate = false;
-        $friend->save();
+        //check if arent friends
+        $user = User::find(auth()->user()->id);
+        $friend = User::find($request['friend_id']);
+        $friends = Friends::where('user_id', $user->id)->where('friend_id', $friend->id)->first();
+        if ($friends == null) {
+            $friends = new Friends();
+            $friends->user_id = $user->id;
+            $friends->friend_id = $friend->id;
+            $friends->validate = false;
+            $friends->save();
+        }
         return back()->with('Amigo adicionado!');
     }
 
@@ -87,8 +92,12 @@ class FriendsController extends Controller
      * @param  \App\Models\Friends  $friends
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Friends $friends)
+    public function destroy(Request $request)
     {
-        //
+        $user = User::find(auth()->user()->id);
+        $friend = User::find($request['friend_id']);
+        $friends = Friends::where('user_id', $user->id)->where('friend_id', $friend->id)->first();
+        $friends->delete();
+        return back()->with('Amigo removido!');
     }
 }

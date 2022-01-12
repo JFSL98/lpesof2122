@@ -10,8 +10,8 @@ class Friends extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id1',
-        'user_id2',
+        'user_id',
+        'friend_id',
         'validate',
     ];
 
@@ -27,15 +27,14 @@ class Friends extends Model
 
     function friendsOfMine()
     {
-        return $this->belongsToMany('User', 'Friends', 'user_id1', 'user2')
+        return $this->belongsToMany('User', 'Friends', 'user_id', 'user2')
             ->wherePivot('validate', '=', 1) // to filter only accepted
             ->withPivot('validate'); // or to fetch accepted value
     }
 
-    // friendship that I was invited to
     function friendOf()
     {
-        return $this->belongsToMany('User', 'Friends', 'user_id2', 'user_id1')
+        return $this->belongsToMany('User', 'Friends', 'friend_id', 'user_id')
             ->wherePivot('validate', '=', 1)
             ->withPivot('validate');
     }
