@@ -17,8 +17,8 @@ class CreateFriendsTable extends Migration
             $table->id();
             $table->foreignId('user_id1');
             $table->foreignId('user_id2');
-            $table->boolean('validado');
-            $table->unique(['user_id1', 'user_id2']);
+            $table->boolean('validate');
+            //$table->unique(['user_id1', 'user_id2']);
             $table->timestamps();
         });
     }
