@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\CommentLike;
+use App\Models\Friends;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\PostComment;
