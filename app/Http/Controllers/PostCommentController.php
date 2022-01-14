@@ -34,52 +34,6 @@ class PostCommentController extends Controller
         return back()->with('Comentário enviado!');
         
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\PostComment  $postComment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(PostComment $postComment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\PostComment  $postComment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(PostComment $postComment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PostComment  $postComment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, PostComment $postComment)
-    {
-        //
-    }
-
     /**
      * Remove o comentário
      *

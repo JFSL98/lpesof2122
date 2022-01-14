@@ -42,51 +42,6 @@ class FriendsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreFriendsRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreFriendsRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Friends  $friends
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Friends $friends)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Friends  $friends
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Friends $friends)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateFriendsRequest  $request
-     * @param  \App\Models\Friends  $friends
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateFriendsRequest $request, Friends $friends)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Friends  $friends
