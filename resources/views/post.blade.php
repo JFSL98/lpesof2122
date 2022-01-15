@@ -69,7 +69,7 @@ $like = $likes->where('user_id', '=', Auth()->user()->id)->first();
                     <i class="btn btn-primary far fa-comment"> {{ $commentcount }}</i>
                 </div>
                 <div class="col-md-3">
-                    @if ($post->user_id === Auth()->user()->id)                
+                    @if ($post->user_id === Auth()->user()->id)
                     <form method="POST" action="{{ route('post.remove', ['id' => $post->id]) }}">
                         @csrf
                         <input type="submit" class="btn btn-danger fas fa-trash-alt" value="&#xf2ed;">
