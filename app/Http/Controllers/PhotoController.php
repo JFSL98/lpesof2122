@@ -23,6 +23,14 @@ class PhotoController extends Controller
         $name = $request->file('image')->getClientOriginalName();
         $request->file('image')->store('public/images/profile_pic');
 
+
+        $user = auth()->user();
+        $old_profile_pic = $user->profile_pic;
+        if ($old_profile_pic != NULL) {
+            unlink('storage/images/profile_pic/' . $old_profile_pic->path);
+            $old_profile_pic->delete();
+        }
+
         $picture = new Photo;
         $picture->name = $name;
         $picture->path = $request->file('image')->hashName();
