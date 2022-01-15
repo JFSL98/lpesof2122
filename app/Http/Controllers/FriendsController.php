@@ -4,22 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Friends;
 use App\Models\User;
-use App\Http\Requests\StoreFriendsRequest;
-use App\Http\Requests\UpdateFriendsRequest;
+
 use Illuminate\Http\Request;
 
 class FriendsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -31,11 +20,20 @@ class FriendsController extends Controller
         $user = User::find(auth()->user()->id);
         $friend = User::find($request['friend_id']);
         $friends = Friends::where('user_id', $user->id)->where('friend_id', $friend->id)->first();
+        $checksend = Friends::where('user_id', $friend->id)->where('friend_id', $user->id)->first();
+        if($checksend != null){
+            $checksend->validate = true;
+            $checksend->save();
+        }
         if ($friends == null) {
             $friends = new Friends();
             $friends->user_id = $user->id;
             $friends->friend_id = $friend->id;
-            $friends->validate = false;
+            if($checksend != null){
+                $friends->validate = true;
+            }else{
+                $friends->validate = false;
+            }
             $friends->save();
         }
         return back()->with('Amigo adicionado!');
@@ -52,6 +50,12 @@ class FriendsController extends Controller
         $user = User::find(auth()->user()->id);
         $friend = User::find($request['friend_id']);
         $friends = Friends::where('user_id', $user->id)->where('friend_id', $friend->id)->first();
+
+        $checkfriend = Friends::where('user_id', $friend->id)->where('friend_id', $user->id)->first();
+        if($checkfriend != null){
+            $checkfriend->validate = false;
+            $checkfriend->save();
+        }
         $friends->delete();
         return back()->with('Amigo removido!');
     }

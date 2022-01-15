@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
         PostComment::factory(200)->create();
         PostLike::factory(500)->create();
         CommentLike::factory(500)->create();
+        //Friends::factory(50)->create();
     }
 }

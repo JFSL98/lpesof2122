@@ -10,7 +10,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
-
+            
+            </ul>
+            
+            <!-- Center Of Navbar -->
+            <ul class="navbar-nav ml-auto">
+            <form class="" action="" method="get">
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="search">
+                <button class="btn btn-outline-success" type="submit">Search</button> 
+            </form>
             </ul>
 
             <!-- Right Side Of Navbar -->
