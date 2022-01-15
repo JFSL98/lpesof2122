@@ -19,6 +19,9 @@ class FriendsController extends Controller
         //check if arent friends
         $user = User::find(auth()->user()->id);
         $friend = User::find($request['friend_id']);
+        if($user == $friend){
+            return redirect()->back()->with('error', 'Nao pode se adicionar a si mesmo');
+        }
         $friends = Friends::where('user_id', $user->id)->where('friend_id', $friend->id)->first();
         $checksend = Friends::where('user_id', $friend->id)->where('friend_id', $user->id)->first();
         if($checksend != null){
