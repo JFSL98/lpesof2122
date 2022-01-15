@@ -14,10 +14,17 @@
             </ul>
             
             <!-- Center Of Navbar -->
+
             <ul class="navbar-nav ml-auto">
-            <form class="" action="" method="get">
-                <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="search">
-                <button class="btn btn-outline-success" type="submit">Search</button> 
+            <form class="" action="{{ route('user.search', ['user_search']) }}" method="get">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="user_search" placeholder="Pesquisar por nome...">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
             </form>
             </ul>
 

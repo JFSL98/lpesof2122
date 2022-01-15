@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\FriendsController;
+use App\Http\Controllers\SearchController;
 use App\Models\Friends;
 
 /*
@@ -56,3 +57,6 @@ Route::post('/post/comment/like', [PostCommentController::class, 'like'])->name(
 // Friends
 Route::post('/{user}/friend/new', [FriendsController::class, 'create'])->name('friend.add')->middleware('auth');
 Route::post('/{user}/friend/remove', [FriendsController::class, 'destroy'])->name('friend.remove')->middleware('auth');
+
+// Search
+Route::get('/search/{user_search}', [SearchController::class, 'search'])->name('user.search')->middleware('auth');
