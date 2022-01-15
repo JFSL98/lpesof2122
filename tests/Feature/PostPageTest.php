@@ -84,57 +84,71 @@ class PostPageTest extends TestCase
         $this->assertDatabaseMissing('post_comments', ['id' => $post_comment->id]);
     }
 
-    /** not working yet */
-    public function see_list_of_comments()
+    /** @test */
+    public function see_list_of_comments_ordered()
     {
         $user = User::factory()->create()->first();
-        $post = Post::factory()->create()->first();
-        $other_post = Post::factory()->create()->first();
+
+        $posts = Post::factory(2)->create();
+        $post = $posts->find(1);
+        $other_post = $posts->find(2);
 
         $this->actingAs($user);
 
-        //$response = $this->get('/post/'.$post->id);
-        //$response = $this->call('GET', '/post/'.$post->id, ['id' => $post->id]);
-        $response = $this->get(route('post.single', ['id' => $post->id]));
-        $response->assertLocation('/post/'.$post->id);
+        $response = $this->get('/post/'.$post->id);
         $response->assertSee('Comment:');
         $response->assertSee('No comments yet.');
         
-        $date_oldest = '2021-01-15';
+        $date_oldest = '2020-01-15';
+        $date_middle = '2021-01-01';
+        $date_newest = '2022-01-16';
         $date_other_post = '2000-01-01';
-        $date_newest = '2022-01-15';
 
         //comments
-        $comment_oldest = PostComment::factory()->create([
+        PostComment::factory()->create([
             'user_id' => $user->id,
             'post_id' => $post->id,
             'content' => $this->faker->sentence,
             'created_at' => $date_oldest,
             'updated_at' => $date_oldest
-        ])->first();
+        ]);
 
-        $comment_newest = PostComment::factory()->create([
+        PostComment::factory()->create([
+            'user_id' => $user->id,
+            'post_id' => $post->id,
+            'content' => $this->faker->sentence,
+            'created_at' => $date_middle,
+            'updated_at' => $date_middle
+        ]);
+
+        PostComment::factory()->create([
             'user_id' => $user->id,
             'post_id' => $post->id,
             'content' => $this->faker->sentence,
             'created_at' => $date_newest,
             'updated_at' => $date_newest
-        ])->first();
+        ]);
 
-        $comment_other_post = PostComment::factory()->create([
+        PostComment::factory()->create([
             'user_id' => $user->id,
             'post_id' => $other_post->id,
             'content' => $this->faker->sentence,
             'created_at' => $date_other_post,
             'updated_at' => $date_other_post
-        ])->first();
+        ]);
 
-        $this->assertDatabaseCount('post_comments',3);
+        $comment_oldest = PostComment::find(1);
+        $comment_middle = PostComment::find(2);
+        $comment_newest = PostComment::find(3);
+        $comment_other_post = PostComment::find(4);
+
+        $this->assertDatabaseCount('post_comments',4);
 
         $response = $this->get('/post/'.$post->id);
         $response->assertDontSee('No comments yet.');
         $response->assertSee($comment_newest->created_at);
         $response->assertSee($comment_oldest->created_at);
+        $response->assertSeeInOrder([$comment_newest->created_at,$comment_middle->created_at,$comment_oldest->created_at]);
         $response->assertDontSee($comment_other_post->created_at);
     }
 
