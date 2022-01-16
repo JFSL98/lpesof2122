@@ -71,4 +71,20 @@ class FriendsTest extends TestCase
 
     }
 
+
+      /** @test */
+      public function search_user()
+      {
+        $users = User::factory(2)->create();
+        $user = $users->find(1);
+        $user2 = $users->find(2);
+         
+        $this->actingAs($user);
+  
+
+        $response=$this->post('/search/'.$user2->id,['user_search'=>$user2->name]);
+
+        $response->assertSee($user2->name);
+      }
+
 }
