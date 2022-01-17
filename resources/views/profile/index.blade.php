@@ -44,6 +44,17 @@
                     </br>
                     friends: {{$user->getFriendsCount()}}
                     following: {{$user->getFollowingsCount()}}
+
+                    @if($user->id == Auth()->user()->id)
+                    <form action="{{route('export')}}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">Download Friends List</button>
+                    </form>
+                    <form action="{{route('exportPost')}}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">Download Posts List</button>
+                    </form>
+                    @endif
                 </div>
             </div>
 
