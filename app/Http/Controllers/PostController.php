@@ -130,14 +130,14 @@ class PostController extends Controller
             }
             if($post_like->like_dislike == true)
             {
-                $friendRequestData = [
+                $likeData = [
                 'body'=>'Recebeste um like!',
                 'likeText'=>$user->name.' , gostou de um post seu!',
                 'url'=>url('/home')
             ];
     
             $usernotified = $post->user;
-            $usernotified->notify(new like($friendRequestData));
+            $usernotified->notify(new like($likeData));
             }
         }
       
