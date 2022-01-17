@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\friendRequestController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -60,3 +61,6 @@ Route::post('/{user}/friend/remove', [FriendsController::class, 'destroy'])->nam
 
 // Search
 Route::get('/search/{user_search}', [SearchController::class, 'search'])->name('user.search')->middleware('auth');
+
+
+Route::get('/send-friendrequest', [friendRequestController::class, 'sendFriendReqNotification']);

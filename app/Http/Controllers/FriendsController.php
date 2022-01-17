@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Friends;
 use App\Models\User;
-
+use App\Notifications\friendRequest;
 use Illuminate\Http\Request;
 
 class FriendsController extends Controller
@@ -39,6 +39,14 @@ class FriendsController extends Controller
             }
             $friends->save();
         }
+
+        $user2 = User::find($friend->id);
+        $friendRequestData = [
+            'body'=>'Recebeste um follow!',
+            'friendRequestText'=>$user2->name.' está-te a seguir, segue-o de volta para o adicionar como amigo!',
+            'url'=>url('/home')
+    ];
+        $friend->notify(new friendRequest($friendRequestData));
         return back()->with('Amigo adicionado!');
     }
 

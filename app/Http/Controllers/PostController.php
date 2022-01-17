@@ -6,8 +6,10 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\PostComment;
 use App\Models\PostLike;
+use App\Notifications\like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use phpDocumentor\Reflection\PseudoTypes\True_;
 
 class PostController extends Controller
 {
@@ -116,6 +118,7 @@ class PostController extends Controller
                     $post_like->like_dislike = $like_dislike;
                     $post_like->save();
                 }
+
             }
             else
             {
@@ -125,7 +128,19 @@ class PostController extends Controller
                 $post_like->like_dislike = $like_dislike;
                 $post_like->save();
             }
+            if($post_like->like_dislike == true)
+            {
+                $friendRequestData = [
+                'body'=>'Recebeste um like!',
+                'likeText'=>$user->name.' , gostou de um post seu!',
+                'url'=>url('/home')
+            ];
+    
+            $usernotified = $post->user;
+            $usernotified->notify(new like($friendRequestData));
+            }
         }
+      
         return back()->withInput();
     }
 }
