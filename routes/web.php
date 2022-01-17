@@ -10,7 +10,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\FriendsController;
 use App\Http\Controllers\SearchController;
-use App\Models\Friends;
+use App\Http\Controllers\PDFController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -64,3 +65,7 @@ Route::get('/search/{user_search}', [SearchController::class, 'search'])->name('
 
 
 Route::get('/send-friendrequest', [friendRequestController::class, 'sendFriendReqNotification']);
+// PDF
+Route::post('/export', [PDFController::class, 'export'])->name('export')->middleware('auth');
+Route::post('/exportPost', [PDFController::class, 'exportPost'])->name('exportPost')->middleware('auth');
+
