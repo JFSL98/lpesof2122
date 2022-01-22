@@ -19,22 +19,24 @@ class FriendsController extends Controller
         //check if arent friends
         $user = User::find(auth()->user()->id);
         $friend = User::find($request['friend_id']);
-        if($user == $friend){
+        if ($user == $friend) {
             return redirect()->back()->with('error', 'Nao pode se adicionar a si mesmo');
         }
         $friends = Friends::where('user_id', $user->id)->where('friend_id', $friend->id)->first();
         $checksend = Friends::where('user_id', $friend->id)->where('friend_id', $user->id)->first();
-        if($checksend != null){
-            $checksend->validate = true;
-            $checksend->save();
-        }
+        //if ($checksend != null) {
+        //    $checksend->validate = true;
+        //    $checksend->save();
+        //}
         if ($friends == null) {
             $friends = new Friends();
             $friends->user_id = $user->id;
             $friends->friend_id = $friend->id;
-            if($checksend != null){
+            if ($checksend != null) {
                 $friends->validate = true;
-            }else{
+                $checksend->validate = true;
+                $checksend->save();
+            } else {
                 $friends->validate = false;
             }
             $friends->save();
@@ -42,10 +44,10 @@ class FriendsController extends Controller
 
         $user2 = User::find($friend->id);
         $friendRequestData = [
-            'body'=>'Recebeste um follow!',
-            'friendRequestText'=>$user2->name.' está-te a seguir, segue-o de volta para o adicionar como amigo!',
-            'url'=>url('/home')
-    ];
+            'body' => 'Recebeste um follow!',
+            'friendRequestText' => $user2->name . ' está-te a seguir, segue-o de volta para o adicionar como amigo!',
+            'url' => url('/home')
+        ];
         $friend->notify(new friendRequest($friendRequestData));
         return back()->with('Amigo adicionado!');
     }
@@ -63,7 +65,7 @@ class FriendsController extends Controller
         $friends = Friends::where('user_id', $user->id)->where('friend_id', $friend->id)->first();
 
         $checkfriend = Friends::where('user_id', $friend->id)->where('friend_id', $user->id)->first();
-        if($checkfriend != null){
+        if ($checkfriend != null) {
             $checkfriend->validate = false;
             $checkfriend->save();
         }
